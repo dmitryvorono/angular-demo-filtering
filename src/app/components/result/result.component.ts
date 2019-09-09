@@ -24,7 +24,7 @@ export class ResultComponent implements OnInit {
   }
 
   _makeFiltersFunctions(routeParams: Params): OperatorFunction<{}, {}>[] {
-    let filterFunctions = Object.keys(routeParams).map(key => {
+    const filterFunctions = Object.keys(routeParams).map(key => {
       return filter((item) => {
         return item[key].toLowerCase().startsWith(routeParams[key].toLowerCase());
       });

@@ -14,7 +14,7 @@ describe('ResultComponent', () => {
   let fixture: ComponentFixture<ResultComponent>;
 
   let dataServiceStub: Partial<DataService>;
-  let activatedRouteStub = {
+  const activatedRouteStub = {
     params: of({
       name: 'n1',
       type: 't1',
