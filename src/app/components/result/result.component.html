@@ -1,2 +1,17 @@
 <app-filter></app-filter>
-{{filteringData|json}}
+<table *ngIf="filteringData" class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Имя</th>
+      <th scope="col">Тип</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of filteringData; let i = index">
+      <th scope="row">{{i + 1}}</th>
+      <td>{{item.name}}</td>
+      <td>{{item.type}}</td>
+    </tr>
+  </tbody>
+</table>
