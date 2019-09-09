@@ -2,17 +2,28 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ResultComponent } from './result.component';
 import { DataService } from 'src/app/services/data-service/data.service';
-import {of} from 'rxjs';
+import {of, from} from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import ItemModel from 'src/app/models/item.model';
 
 describe('ResultComponent', () => {
   let component: ResultComponent;
   let fixture: ComponentFixture<ResultComponent>;
 
   let dataServiceStub: Partial<DataService>;
-
+  let activatedRouteStub = {
+    params: of({
+      name: 'n1',
+      type: 't1',
+    }),
+  };
+  const testData: ItemModel[] = [
+    Object.assign(new ItemModel(), {name: 'n1', type: 't1'}),
+    Object.assign(new ItemModel(), {name: 'n2', type: 't2'}),
+  ];
   beforeEach(async(() => {
     dataServiceStub = {
-      getData: jasmine.createSpy().and.returnValue( of([]) ),
+      getData: jasmine.createSpy().and.returnValue( from(testData) ),
     };
 
     TestBed.configureTestingModule({
@@ -21,6 +32,7 @@ describe('ResultComponent', () => {
       ],
       providers: [
         {provide: DataService, useValue: dataServiceStub},
+        {provide: ActivatedRoute, useValue: activatedRouteStub},
       ],
     })
     .compileComponents();
@@ -50,6 +62,12 @@ describe('ResultComponent', () => {
       const service = fixture.debugElement.injector.get(DataService);
       expect(service.getData).toHaveBeenCalled();
     });
+
+    it('should set filteringData', () => {
+      component.fetchData();
+      expect(component.filteringData).toEqual([testData[0]]);
+    });
+
   });
 
 });
