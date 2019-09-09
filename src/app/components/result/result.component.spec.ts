@@ -5,6 +5,9 @@ import { DataService } from 'src/app/services/data-service/data.service';
 import {of, from} from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import ItemModel from 'src/app/models/item.model';
+import { FilterComponent } from '../filter/filter.component';
+import { FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ResultComponent', () => {
   let component: ResultComponent;
@@ -28,7 +31,12 @@ describe('ResultComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [
-        ResultComponent
+        ResultComponent,
+        FilterComponent,
+      ],
+      imports: [
+        FormsModule,
+        RouterTestingModule,
       ],
       providers: [
         {provide: DataService, useValue: dataServiceStub},
