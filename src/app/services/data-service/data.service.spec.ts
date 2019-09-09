@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { DataService } from './data.service';
+import ItemModel from 'src/app/models/item.model';
 
 describe('DataService', () => {
   let service: DataService;
@@ -14,9 +15,9 @@ describe('DataService', () => {
   });
 
   describe('getData', () => {
-    it('should return array of data', () => {
+    it('should return Observable ItemModel', () => {
       service.getData().subscribe(data => {
-        expect(data.length).toBeGreaterThan(0);
+        expect(data instanceof ItemModel).toBeTruthy();
       });
     });
   });

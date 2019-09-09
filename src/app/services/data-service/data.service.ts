@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import ItemModel from 'src/app/models/item.model';
-import {of, from} from 'rxjs';
+import {from} from 'rxjs';
 
 
 const data: ItemModel[] = [
@@ -24,6 +24,6 @@ export class DataService {
   constructor() { }
 
   getData() {
-    return of(data);
+    return from(data);
   }
 }
