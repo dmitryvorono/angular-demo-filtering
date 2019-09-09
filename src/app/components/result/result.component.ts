@@ -26,7 +26,7 @@ export class ResultComponent implements OnInit {
   _makeFiltersFunctions(routeParams: Params): OperatorFunction<{}, {}>[] {
     const filterFunctions = Object.keys(routeParams).map(key => {
       return filter((item) => {
-        return item[key].toLowerCase().startsWith(routeParams[key].toLowerCase());
+        return item[key].toLowerCase().includes(routeParams[key].toLowerCase());
       });
     });
     filterFunctions.push(toArray());
