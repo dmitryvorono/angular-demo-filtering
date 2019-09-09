@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data-service/data.service';
+import ItemModel from 'src/app/models/item.model';
 
 @Component({
   selector: 'app-result',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResultComponent implements OnInit {
 
-  constructor() { }
+  filteringData: ItemModel[] = [];
+
+  constructor(
+    private dataService: DataService,
+  ) { }
 
   ngOnInit() {
+    this.fetchData();
+  }
+
+  fetchData() {
+    this.dataService.getData().subscribe(data => {
+      this.filteringData = data;
+    });
   }
 
 }
